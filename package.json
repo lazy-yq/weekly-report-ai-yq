@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "opennext build",
+    "preview": "opennext preview",
+    "deploy": "opennext deploy",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "ci": "pnpm install --frozen-lockfile"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.17.1",
@@ -24,6 +27,18 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.69.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd",
+      "unrs-resolver"
+    ]
+  },
+  "engines": {
+    "node": ">=18.18.0"
   }
 }
