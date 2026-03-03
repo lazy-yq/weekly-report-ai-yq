@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { AIModel, ModelConfig, ChatCompletionCreateParams, ChatCompletion } from "./base";
+import { AIModel, ModelConfig, ChatCompletionCreateParams, ChatCompletion, ChatCompletionChunk, Stream } from "./base";
 
 /**
  * 智普模型实现
@@ -29,7 +29,7 @@ export class ZhipuModel implements AIModel {
   async generate(
     messages: ChatCompletionCreateParams["messages"],
     stream: boolean
-  ): Promise<ChatCompletion> {
+  ): Promise<ChatCompletion | Stream<ChatCompletionChunk>> {
     return this.client.chat.completions.create({
       model: this.modelName,
       messages,

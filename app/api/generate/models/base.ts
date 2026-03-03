@@ -1,4 +1,8 @@
-import { ChatCompletionCreateParams, ChatCompletion } from "openai";
+import { ChatCompletionCreateParams, ChatCompletion } from "openai/resources/chat/completions";
+import type { Stream } from "openai/streaming";
+import type { ChatCompletionChunk } from "openai/resources/chat/completions";
+
+export type { ChatCompletionCreateParams, ChatCompletion, ChatCompletionChunk, Stream };
 
 /**
  * AI模型接口
@@ -11,7 +15,7 @@ export interface AIModel {
    * @param stream 是否启用流式响应
    * @returns 聊天完成结果
    */
-  generate(messages: ChatCompletionCreateParams["messages"], stream: boolean): Promise<ChatCompletion>;
+  generate(messages: ChatCompletionCreateParams["messages"], stream: boolean): Promise<ChatCompletion | Stream<ChatCompletionChunk>>;
   
   /**
    * 获取模型名称
