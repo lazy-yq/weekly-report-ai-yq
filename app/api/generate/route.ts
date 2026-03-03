@@ -27,21 +27,14 @@ export async function POST(req: Request) {
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
-        if ("[Symbol.asyncIterator]" in completion) {
-          // 处理流式响应
-          for await (const chunk of completion as Stream<ChatCompletionChunk>) {
-            const content = chunk.choices[0]?.delta?.content || "";
-            if (content) {
-              controller.enqueue(encoder.encode(content));
-            }
-          }
-        } else {
-          // 处理非流式响应
-          const content = (completion as ChatCompletion).choices[0]?.message?.content || "";
+        // 处理流式响应
+        for await (const chunk of completion as Stream<ChatCompletionChunk>) {
+          const content = chunk.choices[0]?.delta?.content || "";
           if (content) {
             controller.enqueue(encoder.encode(content));
           }
         }
+
         controller.close();
       },
     });

@@ -41,7 +41,7 @@ export class ModelFactory {
       [ModelType.ZHIPU]: {
         apiKey: process.env.ZHIPU_API_KEY || "",
         baseURL: "https://open.bigmodel.cn/api/paas/v4",
-        modelName: "glm-5",
+        modelName: "glm-4",
       },
     };
 
@@ -83,9 +83,9 @@ export class ModelFactory {
    */
   public getDefaultModel(): AIModel {
     // 优先使用智普模型，其次使用DeepSeek模型
-    // if (this.models.has(ModelType.ZHIPU)) {
-    //   return this.getModel(ModelType.ZHIPU);
-    // }
+    if (this.models.has(ModelType.ZHIPU)) {
+      return this.getModel(ModelType.ZHIPU);
+    }
     if (this.models.has(ModelType.DEEPSEEK)) {
       return this.getModel(ModelType.DEEPSEEK);
     }
