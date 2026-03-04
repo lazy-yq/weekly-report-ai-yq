@@ -5,9 +5,9 @@
   "packageManager": "pnpm@10.11.1",
   "scripts": {
     "dev": "next dev",
-    "build": "opennext build",
-    "preview": "opennext preview",
-    "deploy": "opennext deploy",
+    "build": "next build",
+    "preview": "next preview",
+    "deploy": "next deploy",
     "start": "next start",
     "lint": "eslint .",
     "ci": "pnpm install --frozen-lockfile"
